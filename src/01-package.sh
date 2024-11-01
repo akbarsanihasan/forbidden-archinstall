@@ -3,6 +3,13 @@ package() {
     print_color $MAGENTA "Preparing your partition... \n"
     sleep 3
 
+    BASE_PACKAGE="base sudo linux-firmware"
+    NETWORK_PACKAGE="networkmanager wpa_supplicant wireless_tools netctl openssh"
+    REFLECTOR_PACKAGE="reflector pacman-contrib"
+    PLYMOUTH_PACKAGE="plymouth"
+    FS_PACKAGE="ntfs-3g exfatprogs"
+    OTHER_PACKAGE="git vim zsh"
+
     if [[ $KRNL == "1" ]]; then
         KRNL_PACKAGE="linux linux-headers"
     elif [[ $KRNL == "2" ]]; then
@@ -36,14 +43,6 @@ package() {
         SWAP_PACKAGE="zram-generator"
     fi
 
-    BASE_PACKAGE="base sudo linux-firmware"
-    NETWORK_PACKAGE="networkmanager wpa_supplicant wireless_tools netctl openssh"
-    REFLECTOR_PACKAGE="reflector pacman-contrib"
-    PLYMOUTH_PACKAGE="plymouth"
-    FS_PACKAGE="ntfs-3g exfatprogs"
-    AUDIO_PACKAGE="pipewire pipewire-pulse pipewire-jack pipewire-alsa wireplumber"
-    OTHER_PACKAGE="git vim zsh"
-
     pacstrap $MOUNT_POINT \
         $KRNL_PACKAGE \
         $BASE_PACKAGE \
@@ -54,7 +53,6 @@ package() {
         $REFLECTOR_PACKAGE \
         $PLYMOUTH_PACKAGE \
         $FS_PACKAGE \
-        $AUDIO_PACKAGE \
         $BLUETOOTH_PACAKGE \
         $OTHER_PACKAGE
 
